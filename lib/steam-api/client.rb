@@ -2,7 +2,9 @@ module Steam
   # Client object used to communicate with the steam webapi
   class Client
     def initialize(url)
-      @conn = Faraday.new(url: url)
+      @conn = Faraday.new(url: url) do |faraday|
+        faraday.options.timeout = 10
+      end
     end
 
     # overriding the get method of Faraday to make things simpler.
